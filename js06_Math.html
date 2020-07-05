@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Math</title>
+<style type="text/css">
+#circle{
+border : 1px solid red;
+display : none;
+}
+</style>
+<script type="text/javascript">
+	//랜덤한 난수를 발생시킬 함수.
+	function randomNum(){
+		//Java와 동일한 난수 생성 방식이다.
+		var rnum = Math.floor(Math.random() * 14 + 4 );
+		//랜덤으로 생성한 난수를 id가 rnum이라는 태그의 value값으로 넣어줬다.
+		document.getElementById("rnum").value = rnum;
+	}
+	
+	//랜덤의 난수로 배경색을 바꿔줄 함수
+	function randomBgColor(){
+		//익명함수로써 rnum이라는 변수에 함수를 집어넣었고, return 값은 0~256의 랜덤한 난수이다.
+		var rnum = function(){
+			return Math.floor(Math.random()*256);
+		}
+		//body의 style인 backgroundColor을 바꿔주는데 rgb하는 색을 뽑아주는 것을 사용했다.
+		document.body.style.backgroundColor = "rgb("+rnum()+", "+rnum()+", "+rnum()+")";
+	}
+	
+	//랜덤의 난수로 원을 만들어 줄 함수
+	function circleView(){
+		//10부터 200까지의 난수를 만들어주고 floor을 해줬다 (소수점 짤라버림.)
+		var rnum = Math.floor(Math.random()*200 + 10);
+		var circle = document.getElementById("circle");
+		
+		//원이라는 것의 가로와 세로의 px를 구해줬다. 이렇게만 했을 경우에는 사각형이나오게 된다.
+		circle.style.width = rnum + "px";
+		circle.style.height = rnum + "px";
+		
+		//그냥 두면 사각형으로 출력이 되기 때문에 borderRadius라는 속성을 통해 난수의 /2 를 깍아줬기 떄문에 원모양이 나올 수 있다.
+		circle.style.borderRadius = Math.floor(rnum/2) + "px";
+		//그리고 버튼을 누르면 diplay를 block해서 화면에 보여지게 만들었다.
+		circle.style.display = "block";
+	}
+	
+	//랜덤의 난수로 원을 만들고 넓이와 둘레를 구해줄 함수
+	function circleArea(){
+		//위에서 만들어준 원으 지름을 가져오기.
+		var circleWidth = document.getElementById("circle").style.width;
+		
+		//지름을 구하는데 circleWidth에는 00px라고 붙어있기 때문에 px를  제외한 나머지를 담아준다.
+		var r2 = circleWidth.substring(0, circleWidth.length-2);
+		//반지름을 구해야하기 때문에 위에서 구한 지름의 /2를 해주는데 소수점을 다 떼고 불러온다.
+		var r = Math.floor(r2/2);
+		
+		//원의 넓이와 둘레를 구하는 공식을 대입해준다.
+		var area = Math.PI * r * r;
+		var len = 2 * Math.PI * r;
+		
+		//id가 area인 태그와 len이라는 태그에 각각 구한 값을 넣어준다.
+		document.getElementById("area").innerHTML = Math.round(area);
+		document.getElementById("len").innerHTML = Math.round(len);
+	}
+	
+</script>
+</head>
+<body>
+	<!-- 랜덤한 어느 수를 출력해서 이곳에 보여질 것이다. -->
+	<h1>랜덤한 숫자 만들기</h1>
+	숫자 : <input type="text" id="rnum" readonly="readonly"/><br/>
+	<input type="button" value="난수 발생" onclick="randomNum();"/>
+	
+	<!-- 랜덤한 어느수로 배경색을 랜덤으로 뽑을 것이다. -->
+	<h1>랜덤으로 배경색 설정하기</h1>
+	<input type="button" value="랜덤 배경색" onclick="randomBgColor();"/>
+	
+	<!-- 랜덤한 난수로 원을 만들어 줄 것이다. -->
+	<h1>원 만들기</h1>
+	<input type="button" value="원만들기" onclick="circleView();"/>
+	<br><br><br><br><br>
+	<div id="circle"></div>
+	
+	
+	<h1>원의 넓이, 원의 둘레</h1>
+	<input type="button" value="원문제" onclick="circleArea();"/> <br>
+	원의 넓이 : <span id="area"></span><br/>
+	원의 둘레 : <span id="len"></span>
+	<!-- 
+		원의 넓이 : pie * r * r
+		원의 둘레 : 2 * pie * r
+	 -->
+</body>
+</html>
