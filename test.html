@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+	//window.onload=function(){} : 윈도우가 로딩이 된 후에 기능을 실행한다.
+	onload = function(){
+		//button태그 중 0번지에 있는 애의 onclick하면 testDate01을 실행하는 의미 ()를 뺴준건 누르지 않아도 실행되기 때문에.
+		document.getElementsByTagName("button")[0].onclick = testDate01;
+		document.getElementsByTagName("button")[1].onclick = testDate02;
+		document.getElementsByTagName("button")[2].onclick = testDate03;
+		document.getElementsByTagName("button")[3].onclick = testDate04;
+		document.getElementsByTagName("button")[4].onclick = testDate05;
+	}
+	
+	//오늘 날짜를 출력할 함수
+	function testDate01(){
+		//inputDate라는 변수에 today라는 태그를 담았다.
+		var inputDate = document.getElementById("today");
+		//오늘 날짜 객체 생성
+		var date = new Date();
+		inputDate.innerHTML = date.toDateString() + "<br/>";			//Tue Jun 09 2020
+		inputDate.innerHTML += date.toLocaleDateString() + "<br/>"; 	//2020.6.9
+		inputDate.innerHTML += date.toLocaleString() + "<br/>";			//2020.6.9 + 현재시간
+		inputDate.innerHTML += date.toLocaleTimeString() + "<br/>";		//현재시간출력
+		//출력문들을 대입한게 아니라 +=해서 원래 있던 것에 +를 해주어서 전부 다 출력이 된다.
+	}
+	//오늘날짜표현
+	function testDate02(){
+		//일주일의 날짜를 담는 변수 설정
+		var dayOfWeek = ["일","월","화","수","목","금","토"];
+		//오늘 날짜 변수 설정
+		var date = new Date();
+		//올해 년도 변수[로컬시간의 연도를 반환]
+		var year = date.getFullYear();
+		//올해 월 변수 [각 달이 -1이 되어있기 때문에 현재월인 7월을 구하고싶으면 +1 을 해줘야한다. 그렇지 않으면 6월이 출력된다.] 
+		var month = date.getMonth() + 1;
+		//올해 일 변수
+		var day = date.getDate();
+		//올해 주 변수
+		var week = date.getDay();
+		//id가 today이인 태그의 innerHTML(글을 바꿔준다.)
+		document.getElementById("today").innerHTML = year + "년" + month + "월" + day + "일" + dayOfWeek[week] + "요일";
+	}
+	
+	//특정날짜 출력하기
+	function testDate03(){
+		//내가 출력할 특정 년도를 변수에 담기.
+		var year=2020;
+		//내가 출력할 특정 달을 변수에 담기
+		var month = 4;
+		//내가 출력할 특정 일을 변수에 담기
+		var day = 14;
+		//담은 모든 값을 현재 날짜를 구하는 Date에 넣기
+		var date = new Date(year, month-1, day);
+		
+		//id가 specific인 태그에 innerHTML해준다. date라는 값을.
+		//date라는 변수에는 내가 출력할 특년 년도,달,일이 입력되어있기 때문에 내가 원하는 달로 출력이된다.
+		document.getElementById("specific").innerHTML = date;
+	}
+	
+	//경과날짜 출력하기
+	function testDate04(){
+		//id가 dates인 태그의 input값을(value) dates라는 변수에 담아준다.[ 지정날짜 ]
+		var dates = document.getElementById("dates").value;
+		//id가 inputdate인 태그의 input값을(value) inputDate라는 변수에 담아준다. [ 경과일 ]
+		var inputDate = document.getById("inputDate").value;	
+		
+		//내가 지정한 날짜를 Date에 넣어준다.그럼 현재 날짜가 특정날짜가 될 것이다.
+		var date = new Date(dates);
+		//내가 지정한 날짜에 경과일날짜를 더해준다.
+		date.setDate(date.getDate() + parseInt(inputDate));
+		//그리고 그 값을 2020.6.9식으로 출력하기 위해서 toLocaleDateString을 사용했다.
+		docoument.getElementById("result").value=date.toLocaleDateString();
+	}
+	
+	//D-DAY
+	function testDate05(){
+		//시작날짜를 입력할 태그의 value값을 변수에 담아준다.
+		var startDate = document.getElementById("dates02").value;
+		//끝날 날짜ㅇ를 입력한 태그의 value값을 변수에 담아준다.
+		var endDate = document.getElementById("inputDate02").value;
+		
+		//시작 날짜, 끝날날짜를 date객체에 담아준다.
+		var nowDate = new Date(startDate);
+		var afterDate = new Date(endDate);
+		
+		//.getTime()이라는 것은 로컬시간 전체의 시간을 밀리초로 반환한 것이다. 이제 이를 나눠야한다.밀리초니까 1000으로 일단 나눠주고
+		//그럼 이제 모든 로컬시간이 초로 변환되었다.초에서 분을 구하려면 * 60을 해줘야한다.그렇게 바뀐 분중에서 시간을 구하려면
+		//*60을 해줘야한다.이제 시간별로 되었으니까 날짜를 구하려면 하루가 24시간이기 때문에 *24를 해준다.
+		var resultDate = (afterDate.getTime() - nowDate.getTime()) / (1000 * 60 * 60 * 24);
+		
+		document.getElementById("result02").value = resultDate;
+	}
+</script>
+</head>
+<body>
+<!-- 오늘날짜, 오늘날짜표현 이라는 버튼을 클릭하면 날짜출력이 되게 해보자. button태그에 onclick이벤트를 주지 않고도 하는 법! -->
+	<h2>오늘날짜 출력</h2>
+	<span id="today"></span>
+	<button>오늘 날짜</button>
+	<button>오늘 날짜 표현</button>
+	
+	<hr/>
+	
+	<h2>특정 날짜 출력</h2>
+	<span id="specific"></span>
+	<button>특정 날짜</button>
+	
+	<hr/>
+	
+	<h2>경과 날짜 출력</h2>
+	<label>지정날짜</label>
+	<input type="date" id="dates" size="50"/><br/>
+	<label>경과일</label>
+	<input type="number" id="inputDate"/><br/>
+	<label>경과 후 날짜</label>
+	<input type="text" id="result" readonly="readonly"/>
+	<br/>
+	<button>경과날짜</button>
+	
+	<hr/>
+	
+	<h2>D-DAY</h2>
+	<label>시작 날짜</label>
+	<input type="date" id="dates02" size="50"/> <br/>
+	<label>종료날짜</label>
+	<input type="date" id="inputDate02"/> <br/>
+	<label>남은 일수</label>
+	<input type="text" id="result02" readonly="readonly"/>
+	<button>남은 일수 구하기</button>
+</body>
+</html>
