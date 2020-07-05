@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>String</title>
+<script type="text/javascript">
+
+	//문자열 합치기
+	function strTest01() {
+		var str01 = "String";
+		var str02 = "Test";
+		//문자열끼리 합칠 때 +연산자 사용
+		var str03 = str01 + str02;
+		alert("str01 + str02 : " + str03);
+		
+		//concat() : 선택한 변수에 이어서 문자열을 더해주는 것이라고 생각하면 된다.
+		var str04 = str01.concat(str02, " : ", " JavaScript ", " String object ");
+		alert(str04);
+	}
+	
+	//다른 자료형 합치기
+	function strTest02() {
+		//숫자형과 논리형 그리고 문자형을 더해도 합칠 수 있고 타입은 objectType이다.
+		var num = 12.5;
+		var bool = true;
+		var result = " String1 " + num + bool;
+		alert(result + " : " + typeof(result));
+	}
+	
+	//문자열 비교하기
+	function strTest03() {
+		//텍스트창을 제공하고 입력을 받을 수 있다.
+		var str = prompt(" 이름을 입력하세요 : ");
+		//span이라는 변수에 id가 res인 태그를 담아준다.
+		var span = document.getElementById("res");
+		
+		//동등연산자 사용 ==
+		//str에 입력 된 값이 kh라면 아래 내용을 span태그에 출력
+		if(str == "kh"){
+			span.textContent = str + "님 환영합니다.";
+			//만일 str의 문자를 모두 소문자로 만들어주고 qclass와 동일하다만 span태그에 아래 내용 출력
+		} else if(str.toLowerCase()=="qclass"){
+			span.textContent = str + "님 환영합니다.";
+		} else {
+			//아예 포함되어있지 않다면 아래내용 출력
+			span.textContent = "이름을 다시 확인해 주세요.";
+		}
+		
+		// == : 자동 형변환
+		//아래에서 num은 숫자이고 비교하는 값은 String이지만 자동으로 형변환을 해줘서 비교하게 되어 true가 나온다.
+		var num = 10;
+		if(num=="10"){
+			alert("num == 10 : true");
+		} else {
+			alert("num == 10 : false");
+		}
+		
+		// === : 엄격한비교
+		//num에는 숫자형이고 비교하는 값은 String이기 때문에 형변환이 되지 않고 비교해서 false가 나온다.
+		if(num === "10"){
+			alert("num === 10 : true");
+		} else{
+			alert("num === 10 : false");
+		}
+		
+		//객체
+		var strObj = new String("kh");
+		var strVal = "kh";
+		
+		//일반 비교여서 자동으로 형 변환을 해주어서 객체와 변수가 같다고 나온다.
+		if(strObj == strVal){
+			alert("같다");
+		} else {
+			alert("다르다");
+		}
+		
+		//엄격한 동등연산자이기 때문에 객체와 변수의 값이 같을 수 없어서 다르다는게 출력.
+		if(strObj === strVal){
+			alert("같다!!!!!!!!!!");
+		} else {
+			alert("다르다!!!!!!!!!!!");
+		}
+	}
+	
+	//문자열 검색하기
+	function strTest04() {
+		var str = " 홍길동 이순신 유재석 강호동 ";
+		var prop = prompt("검색할 이름을 입력해주세요");
+		
+		//indexOf() : 왼쪽에서 오른쪽 인덱스 찾기.
+		alert("indexOf : " + str.indexOf(prop));
+		//lastIndexOf() : 오른쪽에서 왼쪽으로 인덱스 찾기.
+		alert("lastIndexOf : " + str.lastIndexOf(prop));
+		//만일 찾는 값이 없으면 -1 return
+	}
+	
+	//문자열 추출하기
+	function strTest05() {
+		//substring() : 문자열을 index로 찾아서 잘라주는 역할.
+		var strVal = "문자열 추출하기. 관련 메소드:indexOf,substring.";
+		//startIdx를 :를 기준으로 했고.
+		var startIdx = strVal.indexOf(":");
+		//endIdx를 .을 기준으로 했다.
+		//그럼 결국 startIdx부터 endIdx까지 문자열은 indexOf,substring이 된다.
+		var endIdx = strVal.lastIndexOf(".");
+		//그리고 결과값으로 처음에 :을 기준으로 잘랐을 때 0인덱스부터라 :도 포함되어 +1을 해준다.
+		var result = strVal.substring(startIdx + 1, endIdx);
+		
+		//split() : 우리가 원하는 기준으로 자르기.
+		//,를 기준으로 result에 담긴 값을 짤랐다.
+		//indexOf,substring에서 ,를 기준으로 자른 것이다.
+		var splitVal = result.split(",");
+		//콤마를 기준으로 잘랐을 때 앞부분이 0인덱스
+		alert(splitVal[0]);
+		//뒷부분이 1인덱스에 해당한다.
+		alert(splitVal[1]);
+	}
+	
+	//키워드 나누기
+	function strTest06() {
+		var prop = prompt("쉼표로 구분하여 키워드를 입력하세요 : ", " 예) 사과,바나나,키위,수박 ");
+		
+		//prop에 입력한 값을 ,를 기준으로 잘랐다.
+		var propArr = prop.split(",");
+		//res를 담을 변수를 선언해준다.
+		var propRes = "";
+		
+		//prop에 담긴 값을까지 for문을 돌리고 그 결과값들을 propRees변수에 하나씩 다 담는다.
+		for(var i = 0; i < propArr.length; i++){
+			propRes += "키워드 : " + propArr[i] + "<br/>";
+		}
+		//그리고 id가 key인 태그를 propRes로 바꾸어준다.
+		//그럼 내가 입력한 값들에서 ,로 값을 나눈 키워드들이 출력된다.
+		document.getElementById("key").innerHTML = propRes;
+	}
+</script>
+</head>
+<body>
+	<p>
+		문자열 합치기 : <input type="button" value="문자열합치기" onclick="strTest01();" />
+	</p>
+	<p>
+		다른 자료형 합치기 : <input type="button" value="자료형합치기" onclick="strTest02();" />
+	</p>
+	<p>
+		문자열 비교하기 : <input type="button" value="문자열비교하기" onclick="strTest03();" />
+		<span id="res"></span>
+	</p>
+	<p>
+		문자열 검색하기 : <input type="button" value="문자열검색하기" onclick="strTest04();" />
+	</p>
+	<p>
+		문자열 추출하기 : <input type="button" value="문자열추출하기" onclick="strTest05();" />
+	</p>
+	<p>
+		키워드 나누기 : <input type="button" value="키워드나누기" onclick="strTest06();" />
+	</p>
+	<div id="key"></div>
+</body>
+</html>
