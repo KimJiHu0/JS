@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	function popup(){
+		//open(파일, 이름, 옵션)으로 들어간다.
+		//위 아래 전부 가능하지만
+		//첫번쨰는 width와 height를 지정해주어서 그만한 창이 뜰 것이고
+		//두번쨰는 아예 새로운 html이 열릴 것이다.
+		window.open("05Popup02.html","", "width=300px, height=300px");
+		window.open("05Popup02.html");
+	}
+</script>
+</head>
+<body>
+	<h1>팝업창 띄우기</h1>
+	<button onclick="popup();">버튼클릭</button>
+</body>
+</html>
