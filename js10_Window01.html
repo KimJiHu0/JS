@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#regist {
+		border: 1px solid black;
+		background: pink;
+		position: absolute; /*부모태그 기준으로*/
+		top: 200px;
+		left: 500px;
+		display: none;
+		/*visibility : hidden;*/
+	}
+	
+</style>
+<!-- 
+	display : none;			//공간을 차지하지 않는다 (만들어지지 않은 상태)
+	visibility: hidden;		//공간을 차지하고, 보이지 않는다 (만들어져 있는 상태)
+ -->
+<script type="text/javascript">
+	
+	//창열기
+	function openWin(){
+		//url이라는 변수에 html주소를 담았다.
+		var url = "06Window02.html";
+		//만일 title이 myframe라면 body부분 가장 하단에있는 iframe태그에 창이 뜨게 되고
+		//var title = "myframe";
+		//title이 test 혹은 아무 이름일 넣어준다하면(""안에 들어가는 이름이 없는 이름이어야한다.) 새 탭으로 열리게 된다.
+		var title = "test";
+		//torp에서 200 , left에서 600만큼 떨어진 곳에서 가로500 세로 500인 창이 열리게 된다.
+		var prop = "top=200px, left=600px, width=500px, height=500px";
+		window.open(url, title, prop);
+	}
+	
+	//회원가입
+	function registForm(){
+		//display속성이 none이었던 regist라는 이름을 가진 div태그가 회원가입을 눌렀을 떄 block속성으로 변하여 화면에 보여지게된다.
+		document.getElementById("regist").style.display = "block";
+		//그리고 body전체의 배경색을 회색으로 바꿔준다.
+		document.body.style.backgroundColor = "gray";
+		
+		//모든 버튼들을 btns라는 변수에 담았다.
+		var btns = document.getElementsByName("btn");
+		//향상된 for문 [for in문]
+		for(var i in btns){
+			//for문이 모든 btn이라는 이름을 가진 태그를 disabled=사용할 수 없다. 를 true로 변경해준다.
+			//그렇게 되면 회원가입창이 떴을 때에는 아무 버튼도 클릭할 수 없다.
+			btns[i].disabled = "true";
+		}
+	}
+	
+	//회원가입창이 뜨고 확인버튼을 클릭했을 시
+	function closeWin(){
+		//regist라는 이름을 가진 태그의 display를 none으로 바꾸어준다.
+		document.getElementById("regist").style.display = "none";
+		//body의 배경색을 흰색으로 만들어준다.
+		document.body.style.background = "white";
+		
+		var btns = document.getElementsByName("btn");
+		for(var i in btns){
+			//모든 버튼을 다시 활성화 시켜주는 것
+			btns[i].disabled = "false";
+		}
+	}
+	
+	//회원가입 할 아이디를 입력할 때 그냥 입력하려고 하면 뜨게 되는 경고창
+	function idchk(){
+		alert("중복체크를 먼저 해주세요!");
+	}
+	//중복체크를 누르면 실행되는 함수
+	function idCheck(){
+		open("06Window03.html", "", "width=300px, height=300px");
+	}
+</script>
+</head>
+<body>
+		<h1>window객체</h1>
+	
+	<pre>
+	프로퍼티
+	 -document
+	 -history
+	 -location
+	 -navigator
+	 -screen
+	 -frames
+	 -parent
+	 -top
+	 -self
+	메서드
+	 -alert()
+	 -confirm()
+	 -prompt()
+	 -back()
+	 -forward()
+	 -setInterval()
+	 -clearInterval()
+	 -setTimeout()
+	 -open()
+	 -close()
+	 -scroll(),scrollBy(), scrollTo() 
+	</pre>
+
+	<div id="f1">
+		<h1>팝업창 만들기</h1>
+		<!-- 버튼을 클릭하면 openWin()이라는 함수가 실행된다. -->
+		<button onclick="openWin()" name="btn">창열기</button>
+		<hr>
+		<h1>회원가입하기(div팝업창)</h1>
+		<button onclick="registForm()" name="btn">회원가입</button>
+	</div>
+
+	<div id="regist">
+		<form>
+			<table>
+				<caption>회원가입</caption>
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" name="id" onclick="idchk()" readonly="readonly" /> 
+					<input type="button" value="중복체크" onclick="idCheck()" /></td>
+				</tr>
+				<tr>
+					<td>패스워드</td>
+					<td><input type="password" name="pwd" alt="" style="color: red;" checked="checked" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="button" value="확인" onclick="closeWin()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br/><br/><br/>
+	<iframe name="myframe"></iframe>
+	
+</body>
+</html>
