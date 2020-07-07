@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>중복체크</title>
+
+<script type="text/javascript">
+	var ids=["khacademy","java","script"];
+	
+	function confirmChk(){
+		//중복체크를 위해 name이 id인 태그 안에 작성한 값을 id에 담는다.
+		var id=document.getElementsByName("id")[0].value;
+		//body부분 가장 하단에 있는 div태그를 담아준다
+		var div=document.getElementsByTagName("div")[0];
+		//만약 아이디가 존재한다면
+		if(ids.indexOf(id)!=-1){ // 값이없으면 -1.
+			div.innerHTML="<b>아이디가 존재합니다.</b>";
+		}else{
+			var userId="사용할 수 있는 아이디입니다."
+			          +"<input type='button' value='확인'"
+			          +"onclick='insertId(\""+id+"\")'>"; //\""+id+"\"라고 적혀있었음.
+			          									  //onclick="insertId("id")>"; 를
+			          									  //id를 그냥쓰면 변수취급 당해서 id를 그대로 전달해주기 위해""를 붙인다
+			div.innerHTML=userId;          
+		}
+	}
+	
+	function insertId(id){
+		opener.document.getElementsByName("id")[0].value=id;
+		opener.document.getElementsByName("pwd")[0].focus(); //아이디를 확인하고나면 포커스가 자동으로 pw에 간다
+		close();
+	}
+</script>
+
+</head>
+<body>
+<!-- 중복체크를 클릭하게 되면 아래와 같은 창이 뜬다. -->
+	<table>
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" name="id"/></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="중복확인" onclick="confirmChk()"/>
+				<input type="button" value="취소" onclick="self.close()"/>
+			</td>
+		</tr>
+	</table>
+	<div></div>
+
+</body>
+</html>
