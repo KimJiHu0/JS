@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>팝업창</title>
+
+<script type="text/javascript">
+	function test(){
+		//문구를 입력하고 전달버튼을 클릭했을 시에 val이라는 변수에 test라는 id가진 태그의 value값을 담는다.
+		var val=document.getElementsByName("test")[0].value;
+		//그리고 부모창인 06Window01.html에 있는 1번지의 h1태그를 val로 바꾸어준다.
+		opener.document.getElementsByTagName("h1")[1].innerHTML=val;
+		//그리고 나서 창을 닫아준다.
+		close();
+	}
+</script>
+
+</head>
+<body>
+	
+	<!-- 입력값을 입력할 수 있는 input태그가 만들어진다. -->
+	<input type="text" name="test"/>
+	<!-- 전달버튼을 누르면 test함수가 실행된다. -->
+	<input type="button" onclick="test();" value="전달"/>
+	<!-- 창닫기를 누르면 텝이 자동으로 알아서 꺼진다. -->
+	<input type="button" onclick="self.close()" value="창닫기">
+
+
+</body>
+</html>
