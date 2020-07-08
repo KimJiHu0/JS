@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function show01(){
+		//name이 food인 애 중 0번지에 있는 태그를 food라는 변수에 담았다.
+		var food = document.getElementsByName("food")[0];
+		
+		//selectedIndx : 선택한 옵션 태그의 인덱스를 반환한다.
+		//만일 food[0]에서 떡볶이를 선택했다고 치자
+		//그럼 2번지에 위치하기때문에 dix는 2가 된다.
+		var idx = food.selectedIndex;
+		
+		//options : select 태그의 옵션들을 반환한다.
+		//food[0]에 있는 옵션들 중에 idx번지에 있는 value를 담아준다.
+		var foodVal = food.options[idx].value;
+		
+		//alert창에 내가 foodVal에 담아준 foor[0]번지의 옵션들 중 idx번지에 있는 value + 먹고싶어! 가 출력이 된다,
+		alert(foodVal + "먹고싶어!!!!");
+	}
+	
+	function show02(){
+		//name이 food인 태그들 중 1번지에 있는 태그를 담아준다.
+		var food = document.getElementsByName("food")[1];
+		
+		//결과값을 담아줄 변수를 만들어준다.
+		var sel = "";
+		
+		//0부터 food[1]의 옵션들의 길이만큼 반복해준다.
+		for(var i = 0; i < food.options.length; i++){
+			//만일 food[1]의 option들 중 i번지의 애가 선택이 된다면.
+			if(food.options[i].selected){
+				//sel이란느 변수에 food[1]번지에 선택된 옵션의 번지수의 value를 담아주고 ,를 붙여준다.
+				sel += food.options[i].value + ",";
+			}
+		}
+		//그럼 선택한 음식 + , + 먹구싶엉.. 이 출력이 된다.
+		alert(sel + "먹구싶엉..");
+	}
+</script>
+</head>
+<body>
+	<h1>음식 선택하기</h1>
+	
+		<form>
+		<!-- onchange : select 안에 옵션 태그들이 변경되면 실행. -->
+		<select name="food" onchange="show01();">
+			<option>---선택---</option>
+			<option value="치킨">치킨</option>
+			<option value="소고기">소고기</option>
+			<option value="떡볶이">떡볶이</option>
+			<option value="햄버거">햄버거</option>
+			<option value="회">회</option>
+			<option value="양고기">양고기</option>
+			<option value="짜장면">짜장면</option>
+		</select> <br /> <br /> <br /> <br /> <br />
+		
+		<!-- multiple속성을 가졌고 size가 7이라는 것은 화면에 max로 보여주는 갯수가 7개라는 의미. -->
+		<select name="food" multiple="multiple" size="7">
+			<option value="치킨">치킨</option>
+			<option value="소고기">소고기</option>
+			<option value="떡볶이">떡볶이</option>
+			<option value="햄버거">햄버거</option>
+			<option value="회">회</option>
+			<option value="양고기">양고기</option>
+			<option value="짜장면">짜장면</option>
+		</select>
+		<button onclick="show02();">선택</button>
+	</form>
+</body>
+</html>
