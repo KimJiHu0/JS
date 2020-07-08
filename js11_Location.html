@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	function locTest(){
+		//location.reload();
+		//새로고침 : 클라이언트가 서버한테 다시 요청하는 것. request
+		//		     서버는 클라이언트에 응답한다. response
+		//새로고침이 화면만 깜빡거리는게 아니라 클라이언트가 서버한테 다시 요청해서 서버가 다시 응답하는 것. (동기)
+		
+		//location.href="http://www.naver.com"; = 단순 페이지 이동
+		//location.assign("http://www.naver.com"); = href와 동일한 단순 페이지 이동
+		location.replace("http://www.naver.com"); //이전에 페이지이동 이력을 지우고 페이지이동
+	}
+</script>
+</head>
+<body>
+	<a href="http://www.google.com">페이지 이동</a>
+	<input type="button" value="버튼" onclick="locTest();"/>
+</body>
+</html>
