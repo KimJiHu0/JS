@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+			#colorbox{
+			width : 320px;
+			height : 320px;
+			position : relative;
+		}
+		#red, #green, #blue, #yellow{
+			width:150px;
+			height : 150px;
+			border : 1px solid black;
+			position : absolute;
+		}
+		#green{
+			left : 160px;
+		}
+		#blue{
+			top : 160px;
+		}
+		#yellow{
+			left : 160px;
+			top : 160px;
+		}
+</style>
+<script type="text/javascript">
+	//name이 all인 체크박스의 onclick이벤트에 작성된 allsel(this.checked)는 자신의 체크박스가 체크된다면 true 아니라면 false를 리턴한다.
+	function allsel(check){
+		//우선 name이 chk인 태그들을 모두 chks라는 변수에 담는다.
+		var chks = document.getElementsByName("chk");
+		//그리고 0부터 chks(name이 chk인 태그들)의 길이만큼 반복해서 돌아주는데
+		for(var i = 0; i < chks.length; i++){
+			//chks의 처음부터 끝까지 checked속성을 check로 바꿔준다.
+			//이 뜻은 all이라는 name을 가진 체크박스가 체크가 된다면 (true라면) chk의 name을 가진 애들의 
+			//checked속성을 true로 바꿔주고 all이 false라면 chk의 checked속성을 false로 바꿔주어서 체크를 푼다,
+			chks[i].checked = check;
+		}
+	}
+		
+		//'선택'버튼을 눌렀을 때 실행되는 함수
+		function sel(){
+			//name이 chk인 태그들을 모조리 chks라는 변수에 담아준다.
+			var chks = document.getElementsByName("chk");
+			
+			//0부터 chks의 길이만큼 반복해준다.
+			for(var i = 0; i < chks.length; i++){
+				//만일 chks의i번지수의 있는애가 체크가 되어있다면
+				if(chks[i].checked){
+					//id가 chks[i].value라는 것은 name이 chk인 애들의 value를 의미한다.
+					//만일 i가 0이라면 chk의 0번지에 있는 태그의 value인 red를 뜻한다.
+					//그럼 document.getElementById(chks[i].value)이 구문이 사실은
+					//document.getElementById(red)가 되는 것이다.
+					//그냥 red가 아니라 자동으로 문자열로 리턴되어 "red"가 되어서 id가 red인 애의 속성을 바꿔주는 것이다.
+					//backgroundColor 속성을 chks의 0번지에있는 value로 바꾸어준다.
+					document.getElementById(chks[i].value).style.backgroundColor=chks[i].value;
+				} else{
+					//만일 체크가 안되어있다면.
+					//아무 색도 안넣어준다.
+					document.getElementById(chks[i].value).style.backgroundColor="";
+				}
+			}
+		}
+		//초기화버튼
+		function clearDiv(){
+			//css선택자로 태그들 가져오는 것
+			var colorbox = document.querySelectorAll("#colorbox > div");
+			//0부터 마지막번지까지 있는 colorbox 자식태그인 div들의 배경색을 모두 없애준다.
+			for(var i = 0; i < colorbox.length; i++){
+				colorbox[i].style.backgroundColor="";
+			}
+			//그 후에 all이라는 name을 가진 태그의 체크 속성을 false로 변경해주고
+			document.getElementsByName("all")[0].checked=false;
+			//allsell을 false해준다.
+			allsel(false);
+		}
+</script>
+</head>
+<body>
+	<div id ="colorbox">
+		<div id="red">red</div>
+		<div id="green">green</div>
+		<div id="blue">blue</div>
+		<div id="yellow">yellow</div>
+	</div>
+	
+	<div id="base">
+		<form>
+			<input type="checkbox" name="all" onclick="allsel(this.checked);"/>전체선택<br/>
+			
+			<input type="checkbox" name="chk" value="red"/>빨강<br/>
+			<input type="checkbox" name="chk" value="green"/>초록<br/>
+			<input type="checkbox" name="chk" value="blue"/>파랑<br/>
+			<input type="checkbox" name="chk" value="yellow"/>노랑<br/>
+			
+			<input type="button" value="선택" onclick="sel();"/><br/>
+			<input type="button" value="초기화" onclick="clearDiv();"/><br/>
+		</form>
+	</div>
+</body>
+</html>
