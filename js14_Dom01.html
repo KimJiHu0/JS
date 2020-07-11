@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	//부모탐색이라는 버튼을 클릭했을 때 실행되는 함수.
+	function searchPar(){
+		//child02라는 변수에 p태그들 중에서 1번지 태그를 담았다.
+		var child02 = document.getElementsByTagName("p")[1];
+		//child02의 parentNode는 child02변수에 담겨져있는 태그의 부모를 의미한다.
+		var div = child02.parentNode;
+		//그리고 div의 nodeName를 alert
+		alert(div.nodeName);
+		//div의 스타일 배경색을 초록색으로 바꿔준다.
+		div.style.backgroundColor = "green";
+	}
+	
+	//자식탐색이라는 버튼을 눌렀을 때 실행되는 함수
+	function searchChi(){
+		//div태그들 중 0번지에 있는 태그를 div라는 변수에 담아준다.
+		var div = document.getElementsByTagName("div")[0];
+		//위에서 부모탐색을 할 때에는 부모가 하나밖에 없기 때문에 parentNode라고 썼지만
+		//자식을 찾을 때에는 자식요소로 있는 태그들이 몇개가 있을지 몰라서 childNodes를 써줘야한다.
+		//얼마나 들어올지 몰라서 배열 형태로 가져온다.
+		var divChi = div.childNodes;
+		//div태그의 자식들을 전부 담은 divChi.
+		//divChi의 5번지에 있는 태그 배경색을 skyblue로 변경!
+		divChi[5].style.backgroundColor = "skyblue";
+	}
+	
+	//첫번째 제목을 클릭하면 실행되는 함수
+	function test01(){
+		//p태그들중에서 3번지에 있는 태그를 p라는 변수에 담음
+		var p = document.getElementsByTagName("p")[3];
+		//p태그의 부모태그를 parent라는 변수에 담았다.
+		var parent = p.parentNode;
+		
+		parent.style.backgroundColor="red";
+	}
+	
+	//마지막 h3제목 클릭하면 일어나는 함수
+	function test02(){
+		//div변수에 2번지에 있는 div태그를 담았다
+		var div = document.getElementsByTagName("div")[2];
+		/* var divChi = div.childNodes;
+		divChi[1].style.fontSize = "20pt"; */
+		var child = div.childNodes[3];
+		child.style.fontSize = "20pt";
+	}
+</script>
+</head>
+<body>
+	<div>
+		<p>child01</p>
+		<p>child02</p>
+		<p>child03</p>
+	</div>
+	
+	<button onclick="searchPar();">부모탐색</button>
+	<button onclick="searchChi();">자식탐색</button>
+	
+	<hr/>
+	
+	<h3 onclick="test01();"> "test01" 태그를 포함한 div태그의 배경색을 원하는 색으로 적용</h3>
+	<h3 onclick="test02();"> 마지막 div태그에 포함된 test04태그의 폰트크기를 20pt로 적용</h3>
+	
+	<div>
+		<p>test01</p>
+		<p>test02</p>
+	</div>
+	<div>
+		<p>test03</p>
+		<P>test04</P>
+	</div>
+</body>
+</html>
