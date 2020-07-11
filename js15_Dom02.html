@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function eleCreate(){
+		/*
+		엘리먼트 객체 생성하기 : createElement("만들태그이름");
+		text 객체 생성하기 : createTextNode("만들텍스트문구");
+		객체 속성 생성하기 : createAttribute("속성쓸 것");
+		속성 추가하기 : setAttribute(추가할 속성);
+				   setAttribute("추가할 속성", "속성값");
+		*/
+		
+		//div태그를 만들어서 div에 담았다고 생각 할 수 있다.
+		//<div></div>가 하나 만들어진 것
+		var div = document.createElement("div");
+		
+		/*
+		속성주기 1.
+		속성객체를 만들고 그걸 안에 넣는 것
+			var attr = document.createAttribute("style");
+		style = ""; 까지만 만들어진 것.
+			attr.nodeValue="border:2px solid blue";
+		style="";에 위의 속성값이 추가 된 것.
+			div.setAttributeNode(attr);
+		만든 div태그 안의 속성으로 attr 입력
+		<div style="border:2px solid blue"></div>가 생성
+		*/
+		
+		//속성주기 2.
+		//div태그 안에 속성과 속성값을 입력
+		div.setAttribute("style", "border:2px solid blue");
+		
+		//변수 txt에 ""안의 문구를 텍스트형식으로 만들어서 담아준다.
+		var txt = document.createTextNode("생성된 div element");
+		
+		//<div style="border:2px solid blue">생성된 div element</div>가 됌.
+		div.appendChild(txt);
+		//appendChild() : 해당 요소 하위의 요소로 추가
+		
+		//body안에 자식요소로 더한다. div를..
+		document.body.appendChild(div);
+	}
+</script>
+</head>
+<body>
+	<button onclick="eleCreate();">엘리먼트 생성하기</button>
+</body>
+</html>
