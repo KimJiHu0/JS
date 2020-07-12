@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">  /*가상클래스 선택자*/
+   img{
+      vertical-align: middle;
+      width: 300px;
+      height: 300px;
+   }
+   a{
+      font-size: 50pt;
+      text-decoration: none;
+   }
+
+</style>
+<script type="text/javascript">
+   onload = function(){
+	   //anchs변수에 a태그들을 담는다(화살표를 지정해준 a태그 좌,우 화살표 2개)
+      var anchs = document.querySelectorAll("a");
+	   //img변수에는 img태그를 담아준다.
+      var img = document.querySelector("img");
+      var count=1;
+      
+      //왼쪽 a태그 클릭(왼쪽 화살표를 클릭했을 때 일어나는 함수.)
+      anchs[0].onclick = function(){
+    	//img의 "alt"속성을 가져올거야 (해당속성을 가져올수있음)
+         var imgAlt = img.getAttribute("alt"); 
+    	
+    	//만일 내가 가져온 alt속성이 img01이라면
+         if(imgAlt == "img01"){
+        	 //count는 5로 바꿔준다.
+            count = 5;
+        	 //img의 alt속성을 img05로 바꾸어 준다.
+            img.setAttribute("alt","img05");
+        	 //그리고 src경로 속성을 resources/img/img05.jpg로 바꿔준다.
+            img.setAttribute("src","resources/img/img05.jpg");
+         
+          //imgAlt != img01 [alt속성이 img01이 아니라면]
+         }else{
+        	 //img의 alt속성을 img0에 정해놓은 --count를 해준다. [count가 1이되면 위의 if문을 만나서 다시 5로돌아온다.] 
+            img.setAttribute("alt","img0"+(--count));
+        	 //그리고 src경로 속성을 아래와 같이 바꿔준다.
+            img.setAttribute("src","resources/img/img0"+count+".jpg");
+         }
+      }
+      
+      //오른쪽 a태그 클릭
+      anchs[1].onclick = function(){
+         var imgAlt = img.getAttribute("alt");
+         if(imgAlt == "img05"){  //img05가 되면 다시 img01로 돌아가게하는
+            count = 1;
+            img.setAttribute("alt","img01");
+            img.setAttribute("src","resources/img/img01.jpg");
+         }
+         else{    //imgAlt != img05  -> 나머지는 ++되게
+        	 //1,2,3,4,5까지 count가 ++되고 , 5가 되면 위의 if문 실행으로 다시 돌아간다.
+            img.setAttribute("alt","img0"+(++count));
+            img.setAttribute("src","resources/img/img0"+count+".jpg");
+         }
+      }
+   }
+
+</script>
+</head>
+<body>
+   <div>
+      <a href="#" id="lt">◀</a>
+      <img alt="img01" src="resources/img/img01.jpg">
+      <a href="#" id="rt">▶</a>
+   </div>
+</body>
+</html>
