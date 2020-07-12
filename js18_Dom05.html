@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	P{
+		border : 1px solid red;
+	}
+	div{
+		overflow : auto;
+	}
+	/*fieldset은 동적이기 때문에 크기를 지정해주지 않으면 크기가 늘어났다 줄어들었다 한다.
+	대신 크기를 지정해주고 요소 추가를 하게 되면 지정한 크기보다 넘어가면서 추가하게 될 것이다.*/
+</style>
+
+<script type="text/javascript">
+	//div태그 뒤에 추가
+	function addAppend(){
+		//p태그를 만들어서 p변수에 담는당.
+		var p = document.createElement("p");
+		p.textContent = "자식태그들 중 가장 마지막에 붙여넣는다.";
+		
+		//fieldset이라는 변수에 addElem이라는 id를 가진 태그를 담는다. (body부분에 fieldset태그가 해당)
+		var fieldset = document.getElementById("addElem");
+		//그리고 fieldset변수에 appendChild해준다는 의미인데 괄호 안에있는 p태그를 자식요소로 추가한다.가장 뒤에.
+		fieldset.appendChild(p);
+	}
+	
+	var i = 1;
+	//div태그 앞에
+	function addBefore(){
+		//p태그를 만들어 p변수에 담는다.
+		var p = document.createElement("p");
+		p.textContent = "엘리먼트의 앞에 붙여 넣는다." + (i++);
+		
+		//addElem이라는 id를 가진 태그(body안에 fieldset태그)를 담는다.
+		var fieldset = document.getElementById("addElem");
+		//div에는 selector 선택자를 이요해서 fieldset자식태그인 div태그를 담는다.
+		var div = document.querySelector("fieldset > div");
+		//괄호안에는
+		//(삽입할 태그, 기준점 태그) 로 이루어져있다.
+		//이 말은 p태그를 삽입할건데 div태그를 기준으로 앞에 추가한다는 의미이다.
+		fieldset.insertBefore(p, div);
+	}
+	
+	//엘리먼트 이동
+	function moveElement(){
+		//moveElem이라는 변수에는 fieldset태그의 자식태그의 1번지애 있는 태그를 담았다.
+		//0번지는 legend태그가 될 것이고 1번지는 div태그가 될 것이다.
+		var moveElem = document.querySelector("fieldset").children[1];
+		//addElem이라는 변수에는 body를 선택했다.
+		var addElem = document.body;
+		//body부분일 담은 변수 addElem에 자식으로 추가한다ㅡ 괄호안에 있는 것을.(fieldset태그 자식요소의 1번지에 있는 태그를.)
+		addElem.appendChild(moveElem);
+	}
+</script>
+</head>
+<body>
+	<h1>태그 추가하기</h1>
+	
+	<button onclick="addAppend();">appendChild()</button>
+	<button onclick="addBefore();">insertBefore()</button>
+	<button onclick="moveElement();">엘리먼트이동()</button>
+	
+	<fieldset id="addElem">
+		<legend>부모태그</legend>
+		<div>div태그</div>
+	</fieldset>
+</body>
+</html>
