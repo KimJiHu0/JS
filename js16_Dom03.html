@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+img, #imgView{
+	width : 300px;
+	height : 300px;
+}
+</style>
+
+<script type="text/javascript">
+	//1.name이 rdoBtn인 요소들을 가져온다.
+	//2. 가져온 요소들의 length만큼 for문을 돌면서 라디오 버튼이 체크되어있는지 확인하고
+	//만일 체크되었다면 자신의 value값을 참조하여 resources/img/img01.jpg를 가지고 와서
+	//3.img태그를 생성하고, src속성을 생성해서 2번에서 만든 경로를 주입해 화면에 출력
+	
+	function createImg(){
+		//name이 rdoBtn인 태그들을 모두 rdos에 담아준다.
+		var rdos = document.getElementsByName("rdoBtn");
+		//src의 변수를 선언하고 값을 넣지 않는다.
+		var src = "";
+		//0부터 rdos[name이 rdoBtn인 태그들을 담은 변수]의 길이까지 for문
+		for(var i = 0; i < rdos.length; i++){
+			//만일 rdos에 담겨진 rdoBtn이 체크가 되어있다면
+			if(rdos[i].checked){
+				//src변수에 아래의 경로를 더해주는데
+				//src = "resources/img/" 에다가 rdos의 선택된 태그의 value값인 img01.jpg .. 를 넣어준다.
+				src = "resources/img/" + rdos[i].value;
+			}
+		}
+		//변수 img에 img태그 생성.
+		var img = document.createElement("img");
+		//img의 속성으로 src속성 추가.
+		img.setAttribute("src",src);
+		
+		//div변수에 imgView라는 id를 가진 태그 담기.
+		var div = document.getElementById("imgView");
+		//chd에는 imgView인 태그의 자식태그인 img태그를 담는다.
+		var chd = document.querySelector("#imgView > img");
+		//그리고 div를 바꿔준다.div태그를 바꿔주는데 img, chd로
+		div.replaceChild(img, chd);
+	}
+	function deleteImg(){
+		//삭제버튼을 누르면 id가 imgView인 애를 innerHTML해주는데 img src = '' 를 넣어줘서 이미지 제거.
+		document.getElementById("imgView").innerHTML = "<img src = ''>";
+	}
+</script>
+</head>
+<body>
+	<input type="radio" name="rdoBtn" value="img01.jpg"/>그림1 <br/>
+	<input type="radio" name="rdoBtn" value="img02.jpg"/>그림2 <br/>
+	<input type="radio" name="rdoBtn" value="img03.jpg"/>그림3 <br/>
+	
+	<button onclick="createImg();">이미지 생성하기</button>
+	<button onclick="deleteImg();">이미지 삭제하기</button>
+	
+	<!-- 이미지가 보여질 못이고 img태그에 src경로를 추가해줘서 보여지게 하고 경로를 삭제해서 안보여지게 할 것이다. -->
+	<div id="imgView"><img src=""/></div>
+</body>
+</html>
